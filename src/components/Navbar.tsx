@@ -28,17 +28,17 @@ const Navbar = () => {
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a href="/new-and-popular">
                                 New & Popular
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a href="/my-list">
                                 My List
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a href="/by-language">
                                 By Language
                             </a>
                         </li>

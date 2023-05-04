@@ -3,11 +3,11 @@
 
 2. Get TMDB Keys => Done
 
-3. Install TailwindCSS + DaisyUI
+3. Install TailwindCSS + DaisyUI => Done
 
-4. Make navbar (Home + TV Shows + Movies + New & Popular + My List)
+4. Make navbar (Home + TV Shows + Movies + New & Popular + My List) => Done
 
-5. In the home page => Need big first movie/tv show.
+5. In the home page => Need big first movie/tv show. 
 
 6. Then popular row, then Top Rated row, then Comedy Movies row.
 
