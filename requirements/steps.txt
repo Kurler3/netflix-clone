@@ -1,0 +1,13 @@
+
+1. Setup Redux Toolkit => Done
+
+2. Get TMDB Keys => Done
+
+3. Install TailwindCSS + DaisyUI
+
+4. Make navbar (Home + TV Shows + Movies + New & Popular + My List)
+
+5. In the home page => Need big first movie/tv show.
+
+6. Then popular row, then Top Rated row, then Comedy Movies row.
+

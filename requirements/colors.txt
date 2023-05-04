@@ -1,0 +1,8 @@
+
+red: #E50914
+black
+white
+browish: #564d4d
+dark-red: #831010
+
+dark-bg: #303030

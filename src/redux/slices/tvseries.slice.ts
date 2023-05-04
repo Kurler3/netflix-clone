@@ -1,0 +1,49 @@
+import {
+    createSlice
+} from "@reduxjs/toolkit"
+import { ITvSeries } from "../../types/tvseries.types"
+
+
+/////////////////////////////////////
+// DEFINE TV SERIES SLICE TYPE //////
+/////////////////////////////////////
+
+export type ITvSeriesSlice = {
+    popularTvSeries: ITvSeries[] | null;
+    comedyTvSeries: ITvSeries[] | null;
+};
+
+////////////////////////////////////
+// DEFINE INITIAL STATE FOR SLICE //
+////////////////////////////////////
+
+const initialState: ITvSeriesSlice = {
+    popularTvSeries: null,
+    comedyTvSeries: null,
+}
+
+//////////////////////////////////////
+// DEFINE SLICE //////////////////////
+//////////////////////////////////////
+
+export const tvSeriesSlice = createSlice({
+    name: "tvSeries",
+    initialState,
+    reducers: {
+
+    }
+});
+
+//////////////////////////////////////
+// EXPORT ACTIONS ////////////////////
+//////////////////////////////////////
+
+// export const {
+
+// } = tvSeriesSlice.actions;
+
+//////////////////////////////////////
+// EXPORT REDUCER ////////////////////
+//////////////////////////////////////
+
+export default tvSeriesSlice.reducer;
