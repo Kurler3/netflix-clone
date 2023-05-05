@@ -1,14 +1,8 @@
 import { IMovie } from "../types/movie.types";
 import { ITvSeries } from "../types/tvseries.types";
 import { IMAGE_TYPES, TMDB_IMAGE_API_URL } from "../utils/constants";
-import {
-    useState,
-    useEffect
-} from "react";
-import {
-    AiOutlineArrowLeft,
-    AiOutlineArrowRight,
-} from "react-icons/ai"
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 interface IProps {
     title: string;
@@ -16,31 +10,28 @@ interface IProps {
 }
 
 
-// TODO use react-multi-carousel
+const responsive = {
+    desktop: {
+      breakpoint: { max: 2000, min: 1024 },
+      items: 7,
+      slidesToSlide: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2 // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    }
+  };
 
 const MediaCarrousel: React.FC<IProps> = ({
     mediaList,
     title,
 }) => {
-
-    ///////////////////////////////////
-    // STATE //////////////////////////
-    ///////////////////////////////////
-
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-
-    const handlePrevClick = () => {
-        setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
-    };
-
-    const handleNextClick = () => {
-        if (mediaList) {
-            setCurrentIndex((prevIndex) =>
-                prevIndex < mediaList.length - 1 ? prevIndex + 1 : mediaList.length - 1
-            );
-        }
-    };
 
 
     ///////////////////////////////////
@@ -53,25 +44,27 @@ const MediaCarrousel: React.FC<IProps> = ({
             <div className="text-xl font-bold text-secondary mb-3">
                 {title}
             </div>
-
-            <div className="carousel rounded-box gap-4 relative">
-
-                {
-                    currentIndex > 0 && (
-                        <AiOutlineArrowLeft
-                            className="absolute bg-neutral rounded-md opacity-0 hover:opacity-[0.9] left-5 top-[100px] text-[80px] hover:cursor-pointer hover:text-white transition hover:scale-[1.2]"
-                            onClick={handlePrevClick}
-                        />
-                    )
-                }
-
-
+            
+            <Carousel
+                swipeable={true}
+                draggable={false}
+                showDots={false}
+                responsive={responsive}
+                ssr={true} 
+                infinite={true}
+                autoPlay={false}
+                keyBoardControl={false}
+                customTransition="all 0.3s linear"
+                transitionDuration={1000}
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                itemClass="carousel-item cursor-pointer"
+            >
                 {
                     mediaList.map((media, index) => {
                         return (
                             <div
                                 key={`carousel-item-${index}-${media.id}`}
-                                className="carousel-item transition hover:shadow-xl cursor-pointer active"
+                                // className="carousel-item transition hover:shadow-xl cursor-pointer active"
                             >
                                 <img
                                     src={`${TMDB_IMAGE_API_URL}/${IMAGE_TYPES.medium}/${media.poster_path}`}
@@ -81,13 +74,8 @@ const MediaCarrousel: React.FC<IProps> = ({
                         )
                     })
                 }
-
-                <AiOutlineArrowRight
-                    className="absolute bg-neutral rounded-md opacity-0 hover:opacity-[0.9] right-5 top-[100px] text-[80px] hover:cursor-pointer hover:text-white transition hover:scale-[1.2]"
-                    onClick={handleNextClick}
-                />
-                
-            </div>
+            </Carousel>
+    
         </div>
 
     ) : (
