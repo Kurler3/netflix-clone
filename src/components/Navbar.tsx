@@ -10,7 +10,7 @@ const Navbar = () => {
             <div className="navbar-start">
                 <a className="btn btn-ghost text-primary normal-case text-3xl mr-10">Netflix</a>
 
-                <div className="navbar-center hidden md:flex lg:flex">
+                <div className="navbar-center hidden md:flex">
                     <ul className="menu text-white menu-horizontal px-1 ">
                         <li>
                             <a href="/">
@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
 
 
-            <div className="navbar-end">
+            <div className="navbar-end hidden lg:flex">
 
                 <BsSearch className="text-2xl mr-5 text-secondary"/>
 

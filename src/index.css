@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 
-/* * {border: 1px solid red;} */
+* {
+    font-family: 'Arial'
+}
+
 :root {
     --brown-bg: #303030;
 }

@@ -27,7 +27,7 @@ const MediaCarrousel: React.FC<IProps> = ({
                         return (
                             <div
                                 key={`carousel-item-${index}-${media.id}`}
-                                className="carousel-item flex-col hover:scale-[1.1] transition cursor-pointer"
+                                className="carousel-item transition hover:shadow-xl cursor-pointer"
                             >
                                 <img
                                     src={`${TMDB_IMAGE_API_URL}/${IMAGE_TYPES.medium}/${media.poster_path}`}
