@@ -4,7 +4,7 @@
 
 
 * {
-    font-family: 'Arial'
+    font-family: 'Arial';
 }
 
 :root {
@@ -14,4 +14,8 @@
 body {
     background-color: var(--brown-bg);
     min-height: 100vh;
+}
+.mask1 {
+    -webkit-mask-image: linear-gradient(black, transparent);
+    mask-image: linear-gradient(black, transparent);
 }

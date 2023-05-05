@@ -27,6 +27,7 @@ const HomePage = () => {
   ///////////////////////////////
 
   useEffect(() => {
+
     // IF GENRES ARE AVAILABLE => GET COMEDY + OTHER GENRES TV SERIES
     if(tvSeriesState.tvGenres && tvSeriesState.tvGenres.length > 0) {
 
@@ -51,7 +52,6 @@ const HomePage = () => {
 
   }, [appDispatch, tvSeriesState.tvGenres]);
 
-  console.log(tvSeriesState)
 
   return (
     <>
@@ -60,12 +60,25 @@ const HomePage = () => {
       {
         tvSeriesState.popularTvSeries && tvSeriesState.popularTvSeries.length > 0 && (
 
-          <div className="min-w-full h-[700px] relative">
-            <img 
-              src={`${TMDB_IMAGE_API_URL}/${IMAGE_TYPES.original}/${tvSeriesState.popularTvSeries[1].poster_path}`}
-              className="object-cover h-full w-full object-left-top"
-            />
-            <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-black bg-fixed opacity-50"></div>
+          <div className="min-w-full h-[700px]">
+            <div className="relative w-full h-full">
+              {/* POSTER */}
+              <img 
+                src={`${TMDB_IMAGE_API_URL}/${IMAGE_TYPES.original}/${tvSeriesState.popularTvSeries[1].poster_path}`}
+                className="object-cover h-[800px] w-full object-left-top mask1"
+              />
+              {/* TEXT */}
+              <div className="absolute flex flex-col justify-start items-start top-[30%] left-0 px-10"> 
+                  {/* NAME */}
+                  <h1 className="text-8xl">
+                    {tvSeriesState.popularTvSeries[0].name}
+                  </h1>
+                  {/* OVERVIEW */}
+                  <p className="max-w-[500px] mt-5">
+                    {tvSeriesState.popularTvSeries[0].overview}
+                  </p>
+              </div>
+            </div>  
           </div>
 
         )

@@ -6,17 +6,12 @@ import profilePic from "../assets/profile_pic.png";
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-neutral">
+        <div className="navbar absolute top-0 left-0 z-10" style={{background: "linear-gradient(to bottom, rgba(0,0,0,.6), transparent"}}>
             <div className="navbar-start">
-                <a className="btn btn-ghost text-primary normal-case text-3xl mr-10">Netflix</a>
+                <a className="btn btn-ghost text-primary normal-case text-3xl mr-3" href="/">Netflix</a>
 
-                <div className="navbar-center hidden md:flex">
+                <div className="navbar-center flex">
                     <ul className="menu text-white menu-horizontal px-1 ">
-                        <li>
-                            <a href="/">
-                                Home
-                            </a>
-                        </li>
                         <li>
                             <a href="/tvseries">
                                 Tv Series
@@ -27,7 +22,7 @@ const Navbar = () => {
                                 Movies
                             </a>
                         </li>
-                        <li>
+                        <li className="hidden md:flex">
                             <a href="/new-and-popular">
                                 New & Popular
                             </a>
@@ -37,7 +32,7 @@ const Navbar = () => {
                                 My List
                             </a>
                         </li>
-                        <li>
+                        <li className="hidden md:flex">
                             <a href="/by-language">
                                 By Language
                             </a>

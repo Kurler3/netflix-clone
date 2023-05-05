@@ -9,6 +9,7 @@ import ByLanguagePage from "./pages/ByLanguagePage";
 import { useEffect } from "react";
 import { useAppDispatch } from "./redux/store";
 import { fetchTvSeriesData } from "./redux/slices/tvseries.slice";
+import Footer from "./components/Footer";
 
 const App = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
   }, [appDispatch])
 
   return (
-    <>
+    <div className="relative">
       {/* NAVBAR */}
       <Navbar />
       {/* ROUTER */}
@@ -33,7 +34,10 @@ const App = () => {
           <Route path="/by-language" element={<ByLanguagePage />} />
         </Routes>
       </Router>
-    </>
+
+      {/* FOOTER */}
+      <Footer />
+    </div>
   )
 }
 
