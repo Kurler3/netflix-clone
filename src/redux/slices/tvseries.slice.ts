@@ -13,7 +13,7 @@ interface ITvSeriesResponse {
 
 export const fetchTvSeriesData = createAsyncThunk<ITvSeriesResponse, void>(
     'tvseries/fetchTvSeriesData',
-    async (page: any) => {
+    async () => {
 
         const getPopularTvSeriesPromise = axios.get(
             `${TMDB_API_URL}/tv/popular`,
@@ -56,14 +56,8 @@ export const fetchTvSeriesData = createAsyncThunk<ITvSeriesResponse, void>(
 /////////////////////////////////////
 
 export type ITvSeriesSlice = {
-    popularTvSeries: {
-        currentPage: number;
-        data: ITvSeries[] | null;
-    };
-    comedyTvSeries: {
-        currentPage: number;
-        data: ITvSeries[] | null;
-    };
+    popularTvSeries: ITvSeries[] | null;
+    comedyTvSeries: ITvSeries[] | null;
 };
 
 ////////////////////////////////////
@@ -71,14 +65,8 @@ export type ITvSeriesSlice = {
 ////////////////////////////////////
 
 const initialState: ITvSeriesSlice = {
-    popularTvSeries: {
-        currentPage: 1,
-        data: null,
-    },
-    comedyTvSeries: {
-        currentPage: 1,
-        data: null,
-    },
+    popularTvSeries: null,
+    comedyTvSeries: null,
 }
 
 //////////////////////////////////////
@@ -93,8 +81,8 @@ export const tvSeriesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchTvSeriesData.fulfilled, (state, action) => {
-          state.popularTvSeries.data = action.payload.popularTvSeries;
-          state.comedyTvSeries.data = action.payload.comedyTvSeries;
+          state.popularTvSeries = action.payload.popularTvSeries;
+          state.comedyTvSeries = action.payload.comedyTvSeries;
         });
     },
 });
