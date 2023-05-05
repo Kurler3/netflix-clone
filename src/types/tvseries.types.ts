@@ -12,3 +12,11 @@ export interface ITvSeries {
     poster_path: string | null;
     vote_average: number;
 }
+
+export interface ITvSeriesRequestParams {
+    api_key: string;
+    with_genres: string;
+    sort_by: string;
+    page?: number;
+    language: string;
+}
