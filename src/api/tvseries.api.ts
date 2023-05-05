@@ -4,7 +4,7 @@ import { TMDB_API_KEY, TMDB_API_URL } from '../utils/constants';
 import { IGenre } from "../types/common.types";
 export class TvSeriesApi {
 
-    static TMDB_TV_API_URL = `${TMDB_API_URL}/discover/tv}`
+    static TMDB_TV_API_URL = `${TMDB_API_URL}/discover/tv`
 
     static getTvSeriesWithGenre = async (
         genre: IGenre,
@@ -14,7 +14,7 @@ export class TvSeriesApi {
 
         const params: ITvSeriesRequestParams = {
             api_key: TMDB_API_KEY,
-            with_genres: genre.id,
+            with_genres: `${genre.id}`,
             sort_by: "popularity.desc",
             language: "en-US",
         };
