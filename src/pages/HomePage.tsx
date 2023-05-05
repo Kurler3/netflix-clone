@@ -18,7 +18,6 @@ const HomePage = () => {
   // RENDER /////////////////////
   ///////////////////////////////
 
-
   return (
     <>
 
@@ -31,7 +30,9 @@ const HomePage = () => {
 
           return (
             <MediaCarrousel 
-              mediaList={tvSeriesState[`${carrouselCategory.value}TvSeries`]}
+              key={`tv-series-carrousel-big-${index}-${carrouselCategory.value}`}
+              mediaList={tvSeriesState[`${carrouselCategory.value}TvSeries` as keyof typeof tvSeriesState]}
+              title={carrouselCategory.title}
             />
           )
         })
