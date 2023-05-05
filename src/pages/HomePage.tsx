@@ -98,11 +98,6 @@ const HomePage = () => {
         })
       }
 
-      {/* POPULAR TV SERIES  */}
-      
-
-      {/* COMEDY TV SERIES */}
-
     </>
   )
 }
