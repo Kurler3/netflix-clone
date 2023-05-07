@@ -24,8 +24,8 @@ const CategoryFilter:React.FC<IProps> = ({
 
 
     return (
-        <div className='absolute top-20 left-20 dropdown dropdown-hover z-30 bg-neutral rounded-lg'>
-            <label tabIndex={0} className="btn m-1">Categories</label>
+        <div className='absolute top-20 left-20 dropdown dropdown-hover z-30'>
+            <label tabIndex={0} className={`btn m-1 ${selectedTvGenre ? "btn-error" : "btn-neutral"}`}>Categories</label>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
 
                 {
@@ -53,6 +53,7 @@ const CategoryFilter:React.FC<IProps> = ({
                         <li
                             key="tv_category_select_remove_selected"
                             onClick={handleRemoveSelectedTvGenre}
+                            className="btn-outline btn-error"
                         >
                             <a>Remove Selected</a>
                         </li>

@@ -8,6 +8,8 @@ import { ITvSeries } from "../types/tvseries.types";
 import { useAppDispatch } from '../redux/store';
 import { IGenre } from "../types/common.types";
 import { setSelectedTvGenre } from "../redux/slices/tvseries.slice";
+import MediaGrid from "../components/MediaGrid";
+import { fetchGenresTvSeriesData } from "../redux/actions/tvseries.actions";
 
 const TvSeriesPage = () => {
 
@@ -37,19 +39,15 @@ const TvSeriesPage = () => {
     if(!tvSeriesData) {
 
       // FIND THE GENRE
-      const genre = tvSeriesState.tvGenres?.find(genre => genre.name === selectedGenre) as IGenre;
-
-      console.log("Genre to fetch: ", genre)
+      const genre = tvSeriesState.tvGenres?.find(genre => genre.name === transformedGenre) as IGenre;
 
       // DISPATCH FETCH GENRE TV SERIES ACTION
-      // appDispatch(fetchGenresTvSeriesData([genre]))
+      appDispatch(fetchGenresTvSeriesData([genre]))
     }
-
-    console.log("Selected genre: ", selectedGenre)
 
     // SET THE SELECTED TV GENRE IN STATE
     appDispatch(
-      setSelectedTvGenre(selectedGenre)
+      setSelectedTvGenre(transformedGenre)
     )
 
   }, [appDispatch, tvSeriesState]);
@@ -76,7 +74,7 @@ const TvSeriesPage = () => {
       {/* IF NO FILTER => HOME PAGE */}
       {
         tvSeriesState.selectedTvGenre ?
-        <div>Map selected genre tv series !</div>
+        <MediaGrid />
         :
         <HomePage />
       }

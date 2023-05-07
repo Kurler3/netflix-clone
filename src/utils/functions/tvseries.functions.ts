@@ -3,8 +3,8 @@ import { Dispatch } from "react";
 import { IGenre } from "../../types/common.types";
 import { TV_SERIES_CARROUSEL_CATEGORIES } from "../constants";
 import _ from "lodash";
-import { fetchGenresTvSeriesData } from "../../redux/slices/tvseries.slice";
 import { ITvSeries } from "../../types/tvseries.types";
+import { fetchGenresTvSeriesData } from "../../redux/actions/tvseries.actions";
 
 interface IPropsFetchInitialTvSeriesData {
     tvGenres: IGenre[] | null;
@@ -19,8 +19,6 @@ export const fetchInitialTvSeriesData = ( { tvGenres, comedyTvSeries, appDispatc
         tvGenres && tvGenres.length > 0 &&
         comedyTvSeries === null
     ) {
-
-        console.log("GOING  TO FETCH INITIAL DATA AGAIN")
 
         // CLOEN DEEP THE CARROUSEL CATEGORIES
         const missingCategories = _.cloneDeep(TV_SERIES_CARROUSEL_CATEGORIES);

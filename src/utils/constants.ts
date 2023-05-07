@@ -52,3 +52,32 @@ export const TV_SERIES_ALL_CATEGORIES = [
         value: "sci-fi & fantasy"
     }
 ]
+
+
+export const MEDIA_CARROUSEL_RESPONSIVE = {
+    desktop: {
+      breakpoint: { max: 2000, min: 1700 },
+      items: 7,
+      slidesToSlide: 3
+    },
+    laptop: {
+        breakpoint: { max: 1700, min: 1300 },
+      items: 5,
+      slidesToSlide: 2 // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1300, min: 800 },
+      items: 3,
+      slidesToSlide: 1 // optional, default to 1.
+    },
+    smallTablet: {
+        breakpoint: { max: 800, min: 500 },
+      items: 2,
+      slidesToSlide: 1 // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 500, min: 0 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    }
+}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { ITvSeriesRequestParams } from "../types/tvseries.types";
 import { TMDB_API_KEY, TMDB_API_URL } from '../utils/constants';
 import { IGenre } from "../types/common.types";
+import { transformGenreName } from "../utils/functions/common.functions";
 export class TvSeriesApi {
 
     static TMDB_TV_API_URL = `${TMDB_API_URL}/discover/tv`

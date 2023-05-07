@@ -1,79 +1,34 @@
 import {
     createSlice,
-    createAsyncThunk
 } from "@reduxjs/toolkit"
 import { ITvSeries } from "../../types/tvseries.types"
-import { TMDB_API_KEY, TMDB_API_URL } from "../../utils/constants";
-import axios from "axios";
 import { IGenre } from "../../types/common.types";
-import { TvSeriesApi } from "../../api/tvseries.api";
-
-interface ITvSeriesResponse {
-    popularTvSeries: ITvSeries[];
-    tvGenres: IGenre[] | null;
-}
-
-export const fetchTvSeriesData = createAsyncThunk<ITvSeriesResponse, void>(
-    'tvseries/fetchTvSeriesData',
-    async () => {
-
-        const getPopularTvSeriesPromise = axios.get(
-            `${TMDB_API_URL}/tv/popular`,
-            {
-                params: {
-                    api_key: TMDB_API_KEY,
-                    language: "en-US",
-                    page: 1,
-                }
-            }
-        );
-
-        const getTvGenresPromise = axios.get(
-            `${TMDB_API_URL}/genre/tv/list`,
-            {
-                params: {
-                    api_key: TMDB_API_KEY,
-                    language: "en-US",
-                }
-            }
-        )    
-
-        const results = await Promise.all([
-            getPopularTvSeriesPromise,
-            getTvGenresPromise
-        ]); 
-
-        return { 
-            popularTvSeries: results[0].data.results, 
-            tvGenres: results[1].data.genres,
-        };
-    }
-);
-
-interface IFetchGenreTvSeriesDataResponse {
-    genre: string;
-    data: ITvSeries[];
-}
-
-export const fetchGenresTvSeriesData = createAsyncThunk<IFetchGenreTvSeriesDataResponse[], IGenre[]>(
-    'tvseries/fetchGenresTvSeriesData',
-    async (genres: IGenre[]) => {
-        const getGenreTvSeriesResults = await Promise.all(
-            genres.map((genre) => {
-                return TvSeriesApi.getTvSeriesWithGenre(genre);
-            })
-        )
-        return getGenreTvSeriesResults;
-    }
-)
+import { fetchGenrePaginatedTvSeriesData, fetchGenresTvSeriesData, fetchTvSeriesData } from "../actions/tvseries.actions";
+import { transformGenreName } from "../../utils/functions/common.functions";
 
 /////////////////////////////////////
 // DEFINE TV SERIES SLICE TYPE //////
 /////////////////////////////////////
 
 export type ITvSeriesSlice = {
+
+    //////////////////////////
+    // TV SERIES DATA ////////
+    //////////////////////////
+
     popularTvSeries: ITvSeries[] | null;
     comedyTvSeries: ITvSeries[] | null;
+    actionAdventureTvSeries: ITvSeries[] | null;
+    animationTvSeries: ITvSeries[] | null;
+    crimeTvSeries: ITvSeries[] | null;
+    documentaryTvSeries: ITvSeries[] | null;
+    dramaTvSeries: ITvSeries[] | null;
+    scifiFantasyTvSeries: ITvSeries[] | null;
+
+    //////////////////////////
+    // REST //////////////////
+    //////////////////////////
+
     tvGenres: IGenre[] | null;
     selectedTvGenre: string | null;
 };
@@ -83,8 +38,24 @@ export type ITvSeriesSlice = {
 ////////////////////////////////////
 
 const initialState: ITvSeriesSlice = {
+
+    //////////////////////////
+    // TV SERIES DATA ////////
+    //////////////////////////
+
     popularTvSeries: null,
     comedyTvSeries: null,
+    actionAdventureTvSeries: null,
+    animationTvSeries: null,
+    crimeTvSeries: null,
+    documentaryTvSeries: null,
+    dramaTvSeries: null,
+    scifiFantasyTvSeries: null,
+
+    //////////////////////////
+    // REST //////////////////
+    //////////////////////////
+
     tvGenres: null,
     selectedTvGenre: null,
 }
@@ -100,11 +71,7 @@ export const tvSeriesSlice = createSlice({
 
         // SET SELECTED TV GENRE
         setSelectedTvGenre: (state, action) => {
-
-            console.log('Selected!', action.payload)
-
             state.selectedTvGenre = action.payload;
-
         }
 
     },
@@ -117,7 +84,15 @@ export const tvSeriesSlice = createSlice({
           let tvGenres = action.payload.tvGenres;
 
           if(tvGenres) {
-            tvGenres = tvGenres.map((genre) => ({...genre, name: genre.name.toLowerCase()}))
+            tvGenres = tvGenres.map((genre) => {
+
+                const newGenreName = transformGenreName(genre.name.toLowerCase())
+
+                return {
+                    ...genre,
+                    name: newGenreName
+                }
+            })
           }
 
           state.tvGenres = tvGenres;
@@ -127,14 +102,15 @@ export const tvSeriesSlice = createSlice({
         // GENRE TV SERIES DATA FETCH
         builder.addCase(fetchGenresTvSeriesData.fulfilled, (state, action) => {
             for(const fetchedGenreTvSeries of action.payload) {
-
-                //TODO - Add remaining categories.
-                switch(fetchedGenreTvSeries.genre) {
-                    case "comedy":
-                        state.comedyTvSeries = fetchedGenreTvSeries.data;
-                        break;
-                }     
+                (state[`${fetchedGenreTvSeries.genre}TvSeries` as keyof typeof state] as ITvSeries[]) = fetchedGenreTvSeries.data; 
             }
+        })
+
+        // PAGINATED GENRE TV SERIES
+        builder.addCase(fetchGenrePaginatedTvSeriesData.fulfilled, (state, action) => {
+
+            (state[`${action.payload.genre}TvSeries` as keyof typeof state] as ITvSeries[]).push(...action.payload.data);
+
         })
 
     },

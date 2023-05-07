@@ -8,8 +8,8 @@ import MyListPage from "./pages/MyListPage";
 import ByLanguagePage from "./pages/ByLanguagePage";
 import { useEffect } from "react";
 import { useAppDispatch } from "./redux/store";
-import { fetchTvSeriesData } from "./redux/slices/tvseries.slice";
 import Footer from "./components/Footer";
+import { fetchTvSeriesData } from "./redux/actions/tvseries.actions";
 
 const App = () => {
 
