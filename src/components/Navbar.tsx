@@ -13,7 +13,7 @@ const Navbar = () => {
                 <div className="navbar-center flex">
                     <ul className="menu text-white menu-horizontal px-1 ">
                         <li>
-                            <a href="/tvseries">
+                            <a href="/tv-series">
                                 Tv Series
                             </a>
                         </li>

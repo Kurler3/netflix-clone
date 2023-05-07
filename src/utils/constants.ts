@@ -20,3 +20,35 @@ export const TV_SERIES_CARROUSEL_CATEGORIES = [
         value: "comedy"
     }
 ]
+
+
+export const TV_SERIES_ALL_CATEGORIES = [
+    {
+        label: "Comedy",
+        value: "comedy"
+    },
+    {
+        label: "Action & Adventure",
+        value: "action & adventure"
+    },
+    {
+        label: "Animation",
+        value: "animation"
+    },
+    {
+        label: "Crime",
+        value: "crime"
+    },
+    {
+        label: "Documentary",
+        value: "documentary"
+    },
+    {
+        label: "Drama",
+        value: "drama"
+    },
+    {
+        label: "Sci-Fi & Fantasy",
+        value: "sci-fi & fantasy"
+    }
+]

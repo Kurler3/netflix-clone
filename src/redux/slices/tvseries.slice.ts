@@ -75,6 +75,7 @@ export type ITvSeriesSlice = {
     popularTvSeries: ITvSeries[] | null;
     comedyTvSeries: ITvSeries[] | null;
     tvGenres: IGenre[] | null;
+    selectedTvGenre: string | null;
 };
 
 ////////////////////////////////////
@@ -85,6 +86,7 @@ const initialState: ITvSeriesSlice = {
     popularTvSeries: null,
     comedyTvSeries: null,
     tvGenres: null,
+    selectedTvGenre: null,
 }
 
 //////////////////////////////////////
@@ -95,6 +97,15 @@ export const tvSeriesSlice = createSlice({
     name: "tvseries",
     initialState,
     reducers: {
+
+        // SET SELECTED TV GENRE
+        setSelectedTvGenre: (state, action) => {
+
+            console.log('Selected!', action.payload)
+
+            state.selectedTvGenre = action.payload;
+
+        }
 
     },
     extraReducers: (builder) => {
@@ -116,7 +127,13 @@ export const tvSeriesSlice = createSlice({
         // GENRE TV SERIES DATA FETCH
         builder.addCase(fetchGenresTvSeriesData.fulfilled, (state, action) => {
             for(const fetchedGenreTvSeries of action.payload) {
-                state[`${fetchedGenreTvSeries.genre}TvSeries` as keyof typeof state] = fetchedGenreTvSeries.data;        
+
+                //TODO - Add remaining categories.
+                switch(fetchedGenreTvSeries.genre) {
+                    case "comedy":
+                        state.comedyTvSeries = fetchedGenreTvSeries.data;
+                        break;
+                }     
             }
         })
 
@@ -127,6 +144,9 @@ export const tvSeriesSlice = createSlice({
 // EXPORT ACTIONS ////////////////////
 //////////////////////////////////////
 
+export const {
+    setSelectedTvGenre
+} = tvSeriesSlice.actions;
 
 //////////////////////////////////////
 // EXPORT REDUCER ////////////////////
