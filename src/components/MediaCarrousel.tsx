@@ -1,9 +1,11 @@
 import { IMovie } from "../types/movie.types";
 import { ITvSeries } from "../types/tvseries.types";
-import { IMAGE_TYPES, MEDIA_CARROUSEL_RESPONSIVE, TMDB_IMAGE_API_URL } from "../utils/constants";
+import { MEDIA_CARROUSEL_RESPONSIVE } from "../utils/constants";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import MediaItemCard from "./MediaItemCard";
+import { generateNumbersList } from "../utils/functions/common.functions";
+import LoadingMediaCard from "./LoadingMediaCard";
 
 interface IProps {
     title: string;
@@ -21,43 +23,50 @@ const MediaCarrousel: React.FC<IProps> = ({
     // RENDER /////////////////////////
     ///////////////////////////////////
 
-    return mediaList ? (
+    return (
         <div className="p-4">
-
             <div className="text-xl font-bold text-secondary mb-3">
                 {title}
             </div>
-            
+
+
             <Carousel
                 swipeable={true}
                 draggable={false}
                 showDots={false}
                 responsive={MEDIA_CARROUSEL_RESPONSIVE}
-                ssr={true} 
-                infinite={true}
+                ssr={true}
+                infinite={false}
+                arrows={false}
                 autoPlay={false}
                 keyBoardControl={false}
                 customTransition="all 0.3s linear"
                 transitionDuration={1000}
                 removeArrowOnDeviceType={["mobile"]}
-                itemClass="carousel-item cursor-pointer"
+                itemClass={`carousel-item ${mediaList ? "cursor-pointer" : ""}`}
             >
                 {
-                    mediaList.map((media) => {
-                        return (
-                            <MediaItemCard 
-                                key={`carousel-item-${media.id}`}
-                                media={media}
-                            />
-                        )
-                    })
+                    mediaList ?
+                        mediaList.map((media) => {
+                            return (
+                                <MediaItemCard
+                                    key={`carousel-item-${media.id}`}
+                                    media={media}
+                                />
+                            )
+                        }) :
+                        generateNumbersList(7).map((number) => {
+                            return (
+                                <LoadingMediaCard 
+                                key={`carousel-item-loading-${number}-${title}`}
+                                />
+                            )
+                        })
                 }
             </Carousel>
-    
-        </div>
 
-    ) : (
-        <h2>Loading</h2>
+
+        </div>
     )
 }
 

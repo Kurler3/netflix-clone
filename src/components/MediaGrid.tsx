@@ -5,6 +5,8 @@ import { ITvSeries } from "../types/tvseries.types";
 import MediaItemCard from "./MediaItemCard";
 import { useAppDispatch } from '../redux/store';
 import { fetchGenrePaginatedTvSeriesData } from "../redux/actions/tvseries.actions";
+import { generateNumbersList } from "../utils/functions/common.functions";
+import LoadingMediaCard from "./LoadingMediaCard";
 
 
 const MediaGrid = () => {   
@@ -39,8 +41,8 @@ const MediaGrid = () => {
     ////////////////////////////////////
 
     const handleFetchNextPage = useCallback(() => {
-        // IF STILL LOADING => RETURN
-        if(loadingNextPage) return;
+        // IF STILL LOADING OR IF INITIAL DATA STILL NOT THERE => RETURN
+        if(loadingNextPage || !selectedTvSeriesData) return;
 
         const selectedGenre = tvSeriesState.tvGenres?.find((genre) => genre.name === tvSeriesState.selectedTvGenre);
 
@@ -54,7 +56,7 @@ const MediaGrid = () => {
         // REMOVE LOADING
         setLoadingNextPage(false);
 
-    }, [appDispatch, currentPage, loadingNextPage, tvSeriesState.selectedTvGenre, tvSeriesState.tvGenres]);
+    }, [appDispatch, currentPage, loadingNextPage, selectedTvSeriesData, tvSeriesState.selectedTvGenre, tvSeriesState.tvGenres]);
 
     const handleScroll = useCallback(() => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -66,8 +68,6 @@ const MediaGrid = () => {
             handleFetchNextPage()
         }
       }, [handleFetchNextPage]);
-
-    console.log(currentPage)
 
     ////////////////////////////////////
     // USE EFFECT //////////////////////
@@ -96,8 +96,25 @@ const MediaGrid = () => {
 
                 :
 
-                <div>Loading</div>
+                generateNumbersList(14).map((number) => {
+                    return (
+                        <LoadingMediaCard 
+                        key={`carousel-grid-item-loading-${number}`}
+                        />
+                    )
+                })
             } 
+
+            {
+                generateNumbersList(12).map((number) => {
+                    return (
+                        <LoadingMediaCard 
+                        key={`carousel-grid-item-loading-next-${number}`}
+                        />
+                    )
+                })
+            }
+
         </div>
     )
 }

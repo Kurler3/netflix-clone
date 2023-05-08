@@ -10,3 +10,11 @@ export const transformGenreName = (genreName: string): string => {
     });
     return capitalizedWords.join("");
   }
+
+export const generateNumbersList = (length: number): number[] => {
+    const numbers = [];
+    for(let i = 0; i < length; i++) {
+        numbers.push(i);
+    }
+    return numbers;
+}

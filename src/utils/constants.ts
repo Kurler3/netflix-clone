@@ -81,3 +81,4 @@ export const MEDIA_CARROUSEL_RESPONSIVE = {
       slidesToSlide: 1 // optional, default to 1.
     }
 }
+

@@ -21,7 +21,7 @@ const HomePage = () => {
   //////////////////////////////
 
   const tvSeriesState = useSelector(getTvSeriesState)
-  
+
   ///////////////////////////////
   // RENDER /////////////////////
   ///////////////////////////////
@@ -40,22 +40,18 @@ const HomePage = () => {
     <>
 
       {/* BIG BANNER */}
-      {
-        tvSeriesState.popularTvSeries && tvSeriesState.popularTvSeries.length > 0 && (
 
-          <BigBannerMedia 
-            media={tvSeriesState.popularTvSeries[0]}
-          />
+      <BigBannerMedia
+        media={tvSeriesState.popularTvSeries ? tvSeriesState.popularTvSeries[0] : null}
+      />
 
-        )
-      }
 
       {/* MAPPING TV CARROUSELS */}
       {
-        TV_SERIES_CARROUSEL_CATEGORIES.map((carrouselCategory,index) => {
+        TV_SERIES_CARROUSEL_CATEGORIES.map((carrouselCategory, index) => {
 
           return (
-            <MediaCarrousel 
+            <MediaCarrousel
               key={`tv-series-carrousel-big-${index}-${carrouselCategory.value}`}
               mediaList={tvSeriesState[`${carrouselCategory.value}TvSeries` as keyof typeof tvSeriesState] as (IMovie[] | ITvSeries[] | null)}
               title={carrouselCategory.title}
