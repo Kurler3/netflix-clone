@@ -15,9 +15,9 @@ const TvSeriesPage = () => {
 
   const appDispatch = useAppDispatch();
 
-  ///////////////////////////////////
-  // SELECTORS //////////////////////
-  ///////////////////////////////////
+  //////////////////////////////////////////
+  // SELECTORS /////////////////////////////
+  //////////////////////////////////////////
 
   const tvSeriesState = useSelector(getTvSeriesState)
 
@@ -67,8 +67,9 @@ const TvSeriesPage = () => {
 
       {/* CATEGORY FILTER */}
       <CategoryFilter 
-        handleSelectTvGenre={handleSelectTvGenre}
-        handleRemoveSelectedTvGenre={handleRemoveSelectedTvGenre}
+        handleSelectGenre={handleSelectTvGenre}
+        handleRemoveSelectedGenre={handleRemoveSelectedTvGenre}
+        isTvSeries={true}
       />
 
       {/* IF NO FILTER => HOME PAGE */}
@@ -76,7 +77,7 @@ const TvSeriesPage = () => {
         tvSeriesState.selectedTvGenre ?
         <MediaGrid />
         :
-        <HomePage />
+        <HomePage isTvSeries={true} />
       }
       
 

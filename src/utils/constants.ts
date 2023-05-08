@@ -21,6 +21,17 @@ export const TV_SERIES_CARROUSEL_CATEGORIES = [
     }
 ]
 
+export const MOVIES_CARROUSEL_CATEGORIES = [
+    {
+        title: "Popular Movies",
+        value: "popular",
+    },
+    {
+        title: "Comedy Movies",
+        value: "comedy"
+    }
+]
+
 
 export const TV_SERIES_ALL_CATEGORIES = [
     {
@@ -50,6 +61,45 @@ export const TV_SERIES_ALL_CATEGORIES = [
     {
         label: "Sci-Fi & Fantasy",
         value: "sci-fi & fantasy"
+    }
+];
+
+export const MOVIES_ALL_CATEGORIES = [
+    {
+        label: "Comedy",
+        value: "comedy"
+    },
+    {
+        label: "Action",
+        value: "action"
+    },
+    {
+        label: "Adventure",
+        value: "adventure"
+    },
+    {
+        label: "Animation",
+        value: "animation"
+    },
+    {
+        label: "Crime",
+        value: "crime"
+    },
+    {
+        label: "Documentary",
+        value: "documentary",
+    },
+    {
+        label: "Drama",
+        value: "drama",
+    },
+    {
+        label: "Horror",
+        value: "horror"
+    },
+    {
+        label: "Romance",
+        value: "romance"
     }
 ]
 

@@ -1,8 +1,47 @@
-import React from 'react'
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../redux/store";
+import { getMoviesState } from "../redux/selectors/movies.selectors";
+import MediaGrid from "../components/MediaGrid";
+import HomePage from "./HomePage";
+
+
 
 const MoviesPage = () => {
+
+  const appDispatch = useAppDispatch();
+
+  //////////////////////////////////////////
+  // SELECTORS /////////////////////////////
+  //////////////////////////////////////////
+
+  const moviesState = useSelector(getMoviesState);
+
+  //////////////////////////////////////////
+  // FUNCTIONS /////////////////////////////
+  //////////////////////////////////////////
+
+  console.log(moviesState.movieGenres)
+
+  ///////////////////////////////
+  // RENDER /////////////////////
+  ///////////////////////////////
+
+
   return (
-    <div>MoviesPage</div>
+    <div className="relative">
+
+      {/* CATEGORY FILTER */}
+
+
+      {/* IF NO FILTER => HOME PAGE */}
+      {
+        moviesState.selectedMovieGenre ? 
+        <MediaGrid />
+        :
+        <HomePage isTvSeries={false}/>
+      }
+
+    </div>
   )
 }
 
