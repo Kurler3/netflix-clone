@@ -26,6 +26,12 @@ export type ITvSeriesSlice = {
     scifiFantasyTvSeries: ITvSeries[] | null;
 
     //////////////////////////
+    // SEARCH DATA ///////////
+    //////////////////////////
+    
+    searchTvSeries: ITvSeries[] | null;
+
+    //////////////////////////
     // REST //////////////////
     //////////////////////////
 
@@ -51,6 +57,12 @@ const initialState: ITvSeriesSlice = {
     documentaryTvSeries: null,
     dramaTvSeries: null,
     scifiFantasyTvSeries: null,
+
+    //////////////////////////
+    // SEARCH DATA ///////////
+    //////////////////////////
+
+    searchTvSeries: null,
 
     //////////////////////////
     // REST //////////////////

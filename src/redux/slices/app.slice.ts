@@ -1,0 +1,52 @@
+
+
+/////////////////////////////////////
+// DEFINE APP SLICE TYPE ////////////
+/////////////////////////////////////
+
+import { createSlice } from "@reduxjs/toolkit";
+
+export type IAppSlice = {
+    searchText: string;
+};
+
+////////////////////////////////////
+// DEFINE INITIAL STATE FOR SLICE //
+////////////////////////////////////
+
+const initialState: IAppSlice = {
+    searchText: "",
+};
+
+//////////////////////////////////////
+// DEFINE SLICE //////////////////////
+//////////////////////////////////////
+
+export const appSlice = createSlice({
+    name: "app",
+    initialState,
+    reducers: {
+
+        setSearchText: (state, action) => {
+
+            console.log("TO BE SET: ", action.payload)
+
+            state.searchText = action.payload;
+        }
+
+    }
+});
+
+//////////////////////////////////////
+// EXPORT ACTIONS ////////////////////
+//////////////////////////////////////
+
+export const {
+    setSearchText, 
+} = appSlice.actions;
+
+//////////////////////////////////////
+// EXPORT REDUCER ////////////////////
+//////////////////////////////////////
+
+export default appSlice.reducer;

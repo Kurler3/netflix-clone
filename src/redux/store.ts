@@ -2,13 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/user.slice";
 import tvseriesReducer from "./slices/tvseries.slice";
 import moviesReducer from "./slices/movies.slice";
+import appReducer from "./slices/app.slice";
 import {useDispatch} from "react-redux"
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         tvseries: tvseriesReducer,
-        movies: moviesReducer
+        movies: moviesReducer,
+        app: appReducer
     }
 });
 

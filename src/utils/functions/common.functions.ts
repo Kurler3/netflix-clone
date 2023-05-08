@@ -1,3 +1,4 @@
+import { history } from "../history";
 
 
 // TRANSFORM GENRE NAME
@@ -17,4 +18,8 @@ export const generateNumbersList = (length: number): number[] => {
         numbers.push(i);
     }
     return numbers;
+}
+
+export const navigateTo = (path: string) => {
+    history.push(path);
 }

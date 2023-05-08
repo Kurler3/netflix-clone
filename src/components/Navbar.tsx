@@ -3,8 +3,14 @@ import {
 } from "react-icons/bs";
 import { useRef, useCallback, useState, useEffect } from 'react';
 import profilePic from "../assets/profile_pic.png";
+import { useAppDispatch } from "../redux/store";
+import { setSearchText } from "../redux/slices/app.slice";
+import { navigateTo } from "../utils/functions/common.functions";
+
 
 const Navbar = () => {
+
+    const appDispatch = useAppDispatch();
 
     ////////////////////////////////////////
     // STATE ///////////////////////////////
@@ -31,8 +37,15 @@ const Navbar = () => {
     }, [isSearching]);
 
     const handleSearch = useCallback(() => {
-        console.log("SEARCH NOW!", searchBoxRef.current?.value)
-    }, []);
+        if(searchBoxRef.current && searchBoxRef.current?.value.length > 0) {
+
+            // SET NEW SEARCH TEXT IN APP STATE
+            appDispatch(setSearchText(searchBoxRef.current?.value))
+
+            // GO TO SEARCH PAGE
+            navigateTo("/search")
+        }
+    }, [appDispatch]);
 
     const onBlurSearchContainer = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
         const container = event.currentTarget;

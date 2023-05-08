@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import TvSeriesPage from "./pages/TvSeriesPage";
 import MoviesPage from "./pages/MoviesPage";
@@ -8,6 +8,10 @@ import { useAppDispatch } from "./redux/store";
 import Footer from "./components/Footer";
 import { fetchTvSeriesData } from "./redux/actions/tvseries.actions";
 import { fetchInitialMovieData } from "./redux/actions/movies.actions";
+import SearchPage from "./pages/SearchPage";
+import { history } from "./utils/history";
+import { BrowserRouter } from "./components/BrowserRouter";
+
 
 const App = () => {
 
@@ -25,13 +29,14 @@ const App = () => {
       {/* NAVBAR */}
       <Navbar />
       {/* ROUTER */}
-      <Router>
+      <BrowserRouter history={history}>
         <Routes>
           <Route path="/" element={<HomePage isTvSeries={true} />} />
           <Route path="/tv-series" element={<TvSeriesPage />} />
           <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
 
       {/* FOOTER */}
       <Footer />
