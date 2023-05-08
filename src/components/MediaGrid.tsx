@@ -1,15 +1,25 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useSelector } from "react-redux"
 import { getTvSeriesState } from "../redux/selectors/tvseries.selectors"
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ITvSeries } from "../types/tvseries.types";
 import MediaItemCard from "./MediaItemCard";
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 import { fetchGenrePaginatedTvSeriesData } from "../redux/actions/tvseries.actions";
 import { generateNumbersList } from "../utils/functions/common.functions";
 import LoadingMediaCard from "./LoadingMediaCard";
+import { ITvSeriesSlice } from "../redux/slices/tvseries.slice";
+import { IMoviesSlice } from "../redux/slices/movies.slice";
+import { IMovie } from "../types/movie.types";
+import { fetchGenrePaginatedMoviesData } from "../redux/actions/movies.actions";
 
+interface IProps {
+    isTvSeries: boolean;
+}
 
-const MediaGrid = () => {   
+const MediaGrid:React.FC<IProps> = ({
+    isTvSeries,
+}) => {   
 
     const appDispatch = useAppDispatch();
 
@@ -17,7 +27,7 @@ const MediaGrid = () => {
     // STATE ///////////////////////////
     ////////////////////////////////////
 
-    const tvSeriesState = useSelector(getTvSeriesState);
+    const mediaState = useSelector((state:RootState) => isTvSeries ? state.tvseries : state.movies);
 
     const [loadingNextPage, setLoadingNextPage] = useState(false);
 
@@ -25,15 +35,19 @@ const MediaGrid = () => {
     // MEMO ////////////////////////////
     ////////////////////////////////////
 
-    const selectedTvSeriesData = useMemo(() => {
-        return tvSeriesState[`${tvSeriesState.selectedTvGenre}TvSeries` as keyof typeof tvSeriesState] as unknown as ITvSeries[];
-    }, [tvSeriesState]);
+    const selectedData = useMemo(() => {
+        if(isTvSeries) {
+            return mediaState[`${(mediaState as ITvSeriesSlice).selectedTvGenre}TvSeries` as keyof typeof mediaState] as unknown as ITvSeries[];
+        } else {
+            return mediaState[`${(mediaState as IMoviesSlice).selectedMovieGenre}Movies` as keyof typeof mediaState] as unknown as IMovie[];
+        }
+    }, [isTvSeries, mediaState]);
 
     const currentPage = useMemo(() => {
 
-        return selectedTvSeriesData ?  selectedTvSeriesData.length / 20 : 0;
+        return selectedData ?  selectedData.length / 20 : 0;
 
-    }, [selectedTvSeriesData]);
+    }, [selectedData]);
 
 
     ////////////////////////////////////
@@ -42,21 +56,33 @@ const MediaGrid = () => {
 
     const handleFetchNextPage = useCallback(() => {
         // IF STILL LOADING OR IF INITIAL DATA STILL NOT THERE => RETURN
-        if(loadingNextPage || !selectedTvSeriesData) return;
+        if(loadingNextPage || !selectedData) return;
 
-        const selectedGenre = tvSeriesState.tvGenres?.find((genre) => genre.name === tvSeriesState.selectedTvGenre);
+        if(isTvSeries) {
+            const selectedGenre = (mediaState as ITvSeriesSlice).tvGenres?.find((genre) => genre.name === (mediaState as ITvSeriesSlice).selectedTvGenre);
 
-        // CALL DISPATCH TO LOAD NEXT PAGE
-        appDispatch(fetchGenrePaginatedTvSeriesData({
-            page: currentPage + 1,
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            genre: selectedGenre!
-        }))
+            // CALL DISPATCH TO LOAD NEXT PAGE
+            appDispatch(fetchGenrePaginatedTvSeriesData({
+                page: currentPage + 1,
+                genre: selectedGenre!
+            }));
+        } else {
+
+            const selectedGenre = (mediaState as IMoviesSlice).movieGenres?.find((genre) => genre.name === (mediaState as IMoviesSlice).selectedMovieGenre);
+
+            appDispatch(
+                fetchGenrePaginatedMoviesData({
+                    page: currentPage + 1,
+                    genre: selectedGenre!
+                })
+            )
+
+        }
 
         // REMOVE LOADING
         setLoadingNextPage(false);
 
-    }, [appDispatch, currentPage, loadingNextPage, selectedTvSeriesData, tvSeriesState.selectedTvGenre, tvSeriesState.tvGenres]);
+    }, [loadingNextPage, selectedData, isTvSeries, mediaState, appDispatch, currentPage]);
 
     const handleScroll = useCallback(() => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -85,11 +111,11 @@ const MediaGrid = () => {
     return (
         <div className="p-10 pt-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
             {
-                selectedTvSeriesData ? selectedTvSeriesData.map((tvSeries) => {
+                selectedData ? selectedData.map((media) => {
                     return (
                         <MediaItemCard 
-                            key={`media-grid-item-${tvSeries.id}`}
-                            media={tvSeries}
+                            key={`media-grid-item-${media.id}`}
+                            media={media}
                         />
                     )
                 })

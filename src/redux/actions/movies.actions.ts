@@ -78,3 +78,31 @@ export const fetchGenresMoviesData = createAsyncThunk<IMoviesByGenreResponse[], 
 
     }
 )
+
+/////////////////////////////////////////////////////////
+// FETCH TV SERIES DATA BY GENRE + PAGE /////////////////
+/////////////////////////////////////////////////////////
+
+interface IFetchGenrePaginatedMoviesDataResponse {
+    genre: string;
+    data: IMovie[];
+}
+
+interface IFetchGenrePaginatedMoviesDataInput {
+    page: number;
+    genre: IGenre;
+}
+
+export const fetchGenrePaginatedMoviesData = createAsyncThunk<IFetchGenrePaginatedMoviesDataResponse, IFetchGenrePaginatedMoviesDataInput>(
+    'tvseries/fetchGenrePaginatedMoviesData',
+    async ({
+        page,
+        genre,
+    }) => {
+        return await MoviesApi.getMovieWithGenre(
+            genre,
+            page,
+        )
+    }
+)
+

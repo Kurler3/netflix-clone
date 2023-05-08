@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IMovie } from '../../types/movie.types';
 import { IGenre } from '../../types/common.types';
-import { fetchGenresMoviesData, fetchInitialMovieData } from '../actions/movies.actions';
+import { fetchGenrePaginatedMoviesData, fetchGenresMoviesData, fetchInitialMovieData } from '../actions/movies.actions';
 import { transformGenreName } from '../../utils/functions/common.functions';
 
 
@@ -127,6 +127,17 @@ export const moviesSlice = createSlice({
 
         })
 
+
+        /////////////////////////////////////////////////////
+        // GENRE + PAGE MOVIES FETCH ////////////////////////
+        /////////////////////////////////////////////////////
+
+        builder.addCase(fetchGenrePaginatedMoviesData.fulfilled, (state, action) => {
+
+            
+            (state[`${action.payload.genre}Movies` as keyof typeof state] as IMovie[]).push(...action.payload.data);
+
+        })
 
     }
 });

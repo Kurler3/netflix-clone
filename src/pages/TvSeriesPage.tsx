@@ -75,7 +75,7 @@ const TvSeriesPage = () => {
       {/* IF NO FILTER => HOME PAGE */}
       {
         tvSeriesState.selectedTvGenre ?
-        <MediaGrid />
+        <MediaGrid isTvSeries={true}/>
         :
         <HomePage isTvSeries={true} />
       }
