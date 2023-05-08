@@ -18,7 +18,6 @@ const MediaCarrousel: React.FC<IProps> = ({
     title,
 }) => {
 
-
     ///////////////////////////////////
     // RENDER /////////////////////////
     ///////////////////////////////////
@@ -37,7 +36,7 @@ const MediaCarrousel: React.FC<IProps> = ({
                 responsive={MEDIA_CARROUSEL_RESPONSIVE}
                 ssr={true}
                 infinite={false}
-                arrows={false}
+                arrows={!!mediaList}
                 autoPlay={false}
                 keyBoardControl={false}
                 customTransition="all 0.3s linear"
