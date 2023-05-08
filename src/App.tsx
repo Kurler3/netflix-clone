@@ -3,9 +3,6 @@ import HomePage from "./pages/HomePage";
 import TvSeriesPage from "./pages/TvSeriesPage";
 import MoviesPage from "./pages/MoviesPage";
 import Navbar from "./components/Navbar";
-import NewAndPopularPage from "./pages/NewAndPopularPage";
-import MyListPage from "./pages/MyListPage";
-import ByLanguagePage from "./pages/ByLanguagePage";
 import { useEffect } from "react";
 import { useAppDispatch } from "./redux/store";
 import Footer from "./components/Footer";
@@ -33,9 +30,6 @@ const App = () => {
           <Route path="/" element={<HomePage isTvSeries={true} />} />
           <Route path="/tv-series" element={<TvSeriesPage />} />
           <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/new-and-popular" element={<NewAndPopularPage />}/>
-          <Route path="/my-list" element={<MyListPage />} />
-          <Route path="/by-language" element={<ByLanguagePage />} />
         </Routes>
       </Router>
 

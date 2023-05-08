@@ -69,3 +69,17 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
+
+@keyframes openFromRightAnimation {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.open-from-right {
+  animation: openFromRightAnimation 0.5s linear;
+  animation-iteration-count: 1;
+}
