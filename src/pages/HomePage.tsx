@@ -3,7 +3,6 @@
 import {
   useSelector
 } from "react-redux"
-import { getTvSeriesState } from "../redux/selectors/tvseries.selectors";
 import { MOVIES_CARROUSEL_CATEGORIES, TV_SERIES_CARROUSEL_CATEGORIES } from "../utils/constants";
 import MediaCarrousel from "../components/MediaCarrousel";
 import { IMovie } from "../types/movie.types";
@@ -12,7 +11,6 @@ import { useEffect, useMemo, useState } from "react";
 import { RootState, useAppDispatch } from '../redux/store';
 import BigBannerMedia from "../components/BigBannerMedia";
 import { fetchInitialTvSeriesData } from "../utils/functions/tvseries.functions";
-import { getMoviesState } from "../redux/selectors/movies.selectors";
 import { ITvSeriesSlice } from "../redux/slices/tvseries.slice";
 import { IMoviesSlice } from "../redux/slices/movies.slice";
 import { fetchCarrouselMovieData } from "../utils/functions/movies.functions";
