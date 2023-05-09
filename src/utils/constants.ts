@@ -8,10 +8,8 @@ export const IMAGE_TYPES = {
     medium: "w500"
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-export const TMDB_API_KEY = process.env.TMDB_KEY!;
+export const TMDB_API_KEY = import.meta.env.VITE_TMDB_KEY;
 
-console.log('TMDB KEY: ', TMDB_API_KEY)
 
 export const TV_SERIES_CARROUSEL_CATEGORIES = [
     {
