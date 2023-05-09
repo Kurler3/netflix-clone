@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      "process.env": env,
+      "__APP__": env,
     },
   };
 });
