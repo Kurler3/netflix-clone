@@ -26,11 +26,7 @@ export const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-
         setSearchText: (state, action) => {
-
-            console.log("TO BE SET: ", action.payload)
-
             state.searchText = action.payload;
         }
 
