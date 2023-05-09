@@ -8,7 +8,8 @@ export const IMAGE_TYPES = {
     medium: "w500"
 }
 
-export const TMDB_API_KEY = process.env.TMDB_KEY;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+export const TMDB_API_KEY = process.env.TMDB_KEY!;
 
 console.log('TMDB KEY: ', TMDB_API_KEY)
 
