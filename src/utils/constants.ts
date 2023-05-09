@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config()
 
 export const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
@@ -8,7 +10,7 @@ export const IMAGE_TYPES = {
     medium: "w500"
 }
 
-export const TMDB_API_KEY = import.meta.env.VITE_TMDB_KEY;
+export const TMDB_API_KEY = process.env.TMDB_KEY;
 
 
 export const TV_SERIES_CARROUSEL_CATEGORIES = [
