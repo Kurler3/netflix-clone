@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from "axios";
 import { IGenre, IGenreRequestParams } from "../types/common.types";
 import { TMDB_API_KEY, TMDB_API_URL } from "../utils/constants";
@@ -12,7 +13,7 @@ export class MoviesApi {
         language?: string,
     ) => {
         const params: IGenreRequestParams = {
-            api_key: TMDB_API_KEY,
+            api_key: TMDB_API_KEY!,
             with_genres: `${genre.id}`,
             sort_by: "popularity.desc",
             language: "en-US",
@@ -40,7 +41,7 @@ export class MoviesApi {
         page?: number,
     ) => {
         const params: IMoviesSearchRequestParams = {
-            api_key: TMDB_API_KEY,
+            api_key: TMDB_API_KEY!,
             query: title,
         };
 
