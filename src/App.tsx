@@ -12,7 +12,6 @@ import SearchPage from "./pages/SearchPage";
 import { history } from "./utils/history";
 import { BrowserRouter } from "./components/BrowserRouter";
 
-
 const App = () => {
 
   const appDispatch = useAppDispatch();

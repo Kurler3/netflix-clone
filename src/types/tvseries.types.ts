@@ -20,3 +20,9 @@ export interface ITvSeriesRequestParams {
     page?: number;
     language: string;
 }
+
+export interface ITvSeriesSearchRequestParams {
+    api_key: string;
+    query: string;
+    page?: number;
+}

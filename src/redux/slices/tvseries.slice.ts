@@ -3,7 +3,7 @@ import {
 } from "@reduxjs/toolkit"
 import { ITvSeries } from "../../types/tvseries.types"
 import { IGenre } from "../../types/common.types";
-import { fetchGenrePaginatedTvSeriesData, fetchGenresTvSeriesData, fetchTvSeriesData } from "../actions/tvseries.actions";
+import { fetchGenrePaginatedTvSeriesData, fetchGenresTvSeriesData, fetchTvSeriesData, searchTvSeriesByName } from "../actions/tvseries.actions";
 import { transformGenreName } from "../../utils/functions/common.functions";
 
 /////////////////////////////////////
@@ -122,6 +122,17 @@ export const tvSeriesSlice = createSlice({
         builder.addCase(fetchGenrePaginatedTvSeriesData.fulfilled, (state, action) => {
 
             (state[`${action.payload.genre}TvSeries` as keyof typeof state] as ITvSeries[]).push(...action.payload.data);
+
+        });
+
+        // PAGINATED SEARCH TV SERIES
+        builder.addCase(searchTvSeriesByName.fulfilled, (state, action) => {
+
+            if(action.payload.pageFetched === 1) {
+                state.searchTvSeries = action.payload.data;
+            } else {
+                state.searchTvSeries?.push(...action.payload.data);
+            }
 
         })
 

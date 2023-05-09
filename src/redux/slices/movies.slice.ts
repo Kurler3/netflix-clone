@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IMovie } from '../../types/movie.types';
 import { IGenre } from '../../types/common.types';
-import { fetchGenrePaginatedMoviesData, fetchGenresMoviesData, fetchInitialMovieData } from '../actions/movies.actions';
+import { fetchGenrePaginatedMoviesData, fetchGenresMoviesData, fetchInitialMovieData, searchMoviesByTitle } from '../actions/movies.actions';
 import { transformGenreName } from '../../utils/functions/common.functions';
 
 
@@ -148,6 +148,20 @@ export const moviesSlice = createSlice({
 
             
             (state[`${action.payload.genre}Movies` as keyof typeof state] as IMovie[]).push(...action.payload.data);
+
+        })
+
+        /////////////////////////////////////////////////////
+        // SEARCH BY NAME ///////////////////////////////////
+        /////////////////////////////////////////////////////
+
+        builder.addCase(searchMoviesByTitle.fulfilled, (state, action) => {
+
+            if(action.payload.pageFetched === 1) {
+                state.searchMovies = action.payload.data;
+            } else {
+                state.searchMovies?.push(...action.payload.data);
+            }
 
         })
 

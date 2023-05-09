@@ -6,6 +6,8 @@ import profilePic from "../assets/profile_pic.png";
 import { useAppDispatch } from "../redux/store";
 import { setSearchText } from "../redux/slices/app.slice";
 import { navigateTo } from "../utils/functions/common.functions";
+import { searchTvSeriesByName } from "../redux/actions/tvseries.actions";
+import { searchMoviesByTitle } from "../redux/actions/movies.actions";
 
 
 const Navbar = () => {
@@ -42,8 +44,20 @@ const Navbar = () => {
             // SET NEW SEARCH TEXT IN APP STATE
             appDispatch(setSearchText(searchBoxRef.current?.value))
 
+            // SET NEW TV SERIES VALUE
+            appDispatch(searchTvSeriesByName({
+                name: searchBoxRef.current?.value,
+                page: 1,
+            }));
+
+            // SET NEW MOVIES SERIES VALUE
+            appDispatch(searchMoviesByTitle({
+                title: searchBoxRef.current?.value,
+                page: 1,
+            }))
+
             // GO TO SEARCH PAGE
-            navigateTo("/search")
+            navigateTo(`/search`)
         }
     }, [appDispatch]);
 
@@ -56,6 +70,12 @@ const Navbar = () => {
             handleClickSearchIcon();
         }
     }, [handleClickSearchIcon]);
+
+    const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === "Enter" && searchBoxRef.current && searchBoxRef.current?.value.length > 0) {
+            handleSearch();
+        }
+    }, [handleSearch]);
 
     ////////////////////////////////////////
     // USE EFFECT //////////////////////////
@@ -109,6 +129,7 @@ const Navbar = () => {
                                 type="search"
                                 ref={searchBoxRef}
                                 onClick={(e) => e.stopPropagation()}
+                                onKeyDown={handleKeyDown}
                             />
                         )
                     }

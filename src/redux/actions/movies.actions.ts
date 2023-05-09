@@ -106,3 +106,26 @@ export const fetchGenrePaginatedMoviesData = createAsyncThunk<IFetchGenrePaginat
     }
 )
 
+/////////////////////////////////////////////////////////
+// SEARCH BY TITLE ///////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+interface ISearchMoviesByTitleResponse {
+    data: IMovie[];
+    pageFetched: number;
+}
+interface ISearchMoviesByTitleInput {
+    title: string;
+    page?: number;
+}
+
+export const searchMoviesByTitle = createAsyncThunk<ISearchMoviesByTitleResponse,ISearchMoviesByTitleInput>(
+    "movies/searchMoviesByTitle",
+    async ({ title, page }) => {
+        const data = await MoviesApi.searchMoviesByTitle(title, page);
+        return {
+            data: data,
+            pageFetched: page ?? 1,
+        }
+    }
+)

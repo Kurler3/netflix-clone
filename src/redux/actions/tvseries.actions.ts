@@ -100,3 +100,26 @@ export const fetchGenrePaginatedTvSeriesData = createAsyncThunk<IFetchGenrePagin
     }
 )
 
+/////////////////////////////////////////////////////////
+// SEARCH BY NAME ///////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+interface ISearchTvSeriesByNameResponse {
+    data: ITvSeries[];
+    pageFetched: number;
+}
+interface ISearchTvSeriesByNameInput {
+    name: string;
+    page?: number;
+}
+
+export const searchTvSeriesByName = createAsyncThunk<ISearchTvSeriesByNameResponse,ISearchTvSeriesByNameInput>(
+    "tvseries/searchTvSeriesByName",
+    async ({ name, page }) => {
+        const data = await TvSeriesApi.searchTvSeriesByName(name, page);
+        return {
+            data: data,
+            pageFetched: page ?? 1,
+        }
+    }
+)

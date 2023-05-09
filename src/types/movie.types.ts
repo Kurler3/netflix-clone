@@ -15,3 +15,9 @@ export interface IMovie {
     video: boolean;
     vote_average: number;
 }
+
+export interface IMoviesSearchRequestParams {
+    api_key: string;
+    query: string;
+    page?: number;
+}

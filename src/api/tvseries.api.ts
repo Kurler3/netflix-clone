@@ -1,10 +1,9 @@
 import axios from "axios";
 import { TMDB_API_KEY, TMDB_API_URL } from '../utils/constants';
 import { IGenre, IGenreRequestParams } from "../types/common.types";
+import { ITvSeriesSearchRequestParams } from "../types/tvseries.types";
 
 export class TvSeriesApi {
-
-    static TMDB_TV_API_URL = `${TMDB_API_URL}/discover/tv`
 
     static getTvSeriesWithGenre = async (
         genre: IGenre,
@@ -23,7 +22,7 @@ export class TvSeriesApi {
         if(language) params.language = language;
 
         const result = await axios.get(
-            this.TMDB_TV_API_URL,
+            `${TMDB_API_URL}/discover/tv`,
             {
                 params,
             }
@@ -35,5 +34,25 @@ export class TvSeriesApi {
         };
     }   
 
+    static searchTvSeriesByName = async (
+        name: string,
+        page?: number,
+    ) => {
+        const params: ITvSeriesSearchRequestParams = {
+            api_key: TMDB_API_KEY,
+            query: name,
+        };
+
+        if(page) params.page = page;
+
+        const result = await axios.get(
+            `${TMDB_API_URL}/search/tv`,
+            {
+                params,
+            }
+        );
+
+        return result.data.results;
+    }
 
 }

@@ -9,3 +9,4 @@ export const getSelectedTvSeriesGenre = (state: RootState) => state.tvseries.sel
 
 export const getTvSeriesState = (state:RootState) => state.tvseries;
 
+export const getSearchTvSeries = (state:RootState) => state.tvseries.searchTvSeries;
