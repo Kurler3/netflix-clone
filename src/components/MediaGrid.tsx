@@ -140,7 +140,7 @@ const MediaGrid: React.FC<IProps> = ({
     ////////////////////////////////////
     
     return (
-        <div className={`p-10 pt-${searchText ? "0":"40"} grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4`}>
+        <div className={`p-10 ${searchText ? "":"pt-40"} grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4`}>
             {
                 selectedData ? selectedData.map((media) => {
                     return (
