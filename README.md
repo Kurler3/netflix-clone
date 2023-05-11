@@ -30,3 +30,17 @@ To run this project on your machine follow these steps:
 - daisyUI
 - Redux Toolkit
 - TMDB API
+
+## Screenshots
+
+### Home Page
+
+![Home Page](./screenshots/home_page.png)
+
+### Comedy Movies
+
+![Comedy Movies](./screenshots/comedy_movies.png)
+
+### Movies Category Dropdown
+
+![Movies Category Dropdown](./screenshots/movies_category_dropdown.png)
